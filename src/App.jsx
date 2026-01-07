@@ -3,7 +3,7 @@ import Header from './components/Header';
 import ChatContainer from './components/ChatContainer';
 import ChatInput from './components/ChatInput';
 
-const API_BASE_URL = 'http://localhost:8000';
+const API_BASE_URL = 'interactive-cv.fragile-lanita.internal:8000';
 const PROFILE_ID = 1;
 
 function App() {
@@ -79,7 +79,7 @@ function App() {
     } catch (err) {
       console.error('Error sending message:', err);
       setError('Something went wrong. Please try again.');
-      
+
       // Add error message to chat
       const errorMessage = {
         id: Date.now() + 1,
@@ -97,14 +97,14 @@ function App() {
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
       <div className="container mx-auto px-4 py-8 max-w-4xl">
         <Header />
-        
+
         <div className="bg-white rounded-2xl shadow-lg overflow-hidden border border-slate-200">
           <ChatContainer
             messages={messages}
             isLoading={isLoading}
             ref={chatContainerRef}
           />
-          
+
           <ChatInput
             onSendMessage={handleSendMessage}
             disabled={isLoading}
