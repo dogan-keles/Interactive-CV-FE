@@ -239,7 +239,7 @@ VITE_API_BASE_URL=https://your-production-api.com
 ### Update App.jsx
 
 ```javascript
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'interactive-cv.fragile-lanita.internal:8000';
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://fragile-lanita-rebero-app-897a7f5f.koyeb.app';
 ```
 
 ---

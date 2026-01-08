@@ -8,7 +8,7 @@ export default defineConfig({
     port: 3000,
     proxy: {
       '/api': {
-        target: 'interactive-cv.fragile-lanita.internal:8000',
+        target: 'https://fragile-lanita-rebero-app-897a7f5f.koyeb.app',
         changeOrigin: true,
       },
     },

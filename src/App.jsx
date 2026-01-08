@@ -3,7 +3,7 @@ import Header from './components/Header';
 import ChatContainer from './components/ChatContainer';
 import ChatInput from './components/ChatInput';
 
-const API_BASE_URL = 'interactive-cv.fragile-lanita.internal:8000';
+const API_BASE_URL = 'https://fragile-lanita-rebero-app-897a7f5f.koyeb.app';
 const PROFILE_ID = 1;
 
 function App() {

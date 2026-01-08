@@ -211,7 +211,7 @@ setMessages([...messages, userMessage])
 setIsLoading(true)
 
 // 4. Make API call
-fetch('interactive-cv.fragile-lanita.internal:8000/api/chat', {
+fetch('https://fragile-lanita-rebero-app-897a7f5f.koyeb.app/api/chat', {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify({ query, profile_id: 1 })
@@ -309,7 +309,7 @@ const debouncedSubmit = useMemo(
 // Always use HTTPS in production
 const API_BASE_URL = process.env.NODE_ENV === 'production'
   ? 'https://api.production.com'
-  : 'interactive-cv.fragile-lanita.internal:8000';
+  : 'https://fragile-lanita-rebero-app-897a7f5f.koyeb.app';
 
 // Validate responses
 if (!response.ok) {
@@ -446,7 +446,7 @@ useEffect(() => {
 
 ```javascript
 // For real-time updates
-const ws = new WebSocket('ws://interactive-cv.fragile-lanita.internal:8000');
+const ws = new WebSocket('ws://https://fragile-lanita-rebero-app-897a7f5f.koyeb.app');
 ws.onmessage = (event) => {
   const message = JSON.parse(event.data);
   setMessages(prev => [...prev, message]);

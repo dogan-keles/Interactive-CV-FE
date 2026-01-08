@@ -31,7 +31,7 @@ This frontend allows recruiters, hiring managers, and visitors to interact with 
 ### Prerequisites
 
 - Node.js 18+ and npm
-- Backend API running on `interactive-cv.fragile-lanita.internal:8000`
+- Backend API running on `https://fragile-lanita-rebero-app-897a7f5f.koyeb.app`
 
 ### Setup
 
@@ -84,7 +84,7 @@ src/
 ### Endpoint
 
 ```
-POST http://interactive-cv.fragile-lanita.internal:8000/api/chat
+POST http://https://fragile-lanita-rebero-app-897a7f5f.koyeb.app/api/chat
 ```
 
 ### Request Payload
@@ -110,7 +110,7 @@ POST http://interactive-cv.fragile-lanita.internal:8000/api/chat
 The API base URL and profile ID can be configured in `src/App.jsx`:
 
 ```javascript
-const API_BASE_URL = 'interactive-cv.fragile-lanita.internal:8000';
+const API_BASE_URL = 'https://fragile-lanita-rebero-app-897a7f5f.koyeb.app';
 const PROFILE_ID = 1;
 ```
 
@@ -201,7 +201,7 @@ The interface suggests these example queries:
 
 If you see "Something went wrong" errors:
 
-1. Ensure backend is running on `interactive-cv.fragile-lanita.internal:8000`
+1. Ensure backend is running on `https://fragile-lanita-rebero-app-897a7f5f.koyeb.app`
 2. Check browser console for CORS errors
 3. Verify API endpoint returns expected JSON format
 
