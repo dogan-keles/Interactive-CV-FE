@@ -17,7 +17,7 @@ npm run dev
 http://localhost:3000
 ```
 
-That's it! The app should now be running and connected to your backend at `https://fragile-lanita-rebero-app-897a7f5f.koyeb.app`.
+That's it! The app should now be running and connected to your backend at `https://lengthy-sarina-cypralex-fb6a4e7e.koyeb.app`.
 
 ---
 
@@ -28,7 +28,7 @@ That's it! The app should now be running and connected to your backend at `https
 If your backend is running on a different port or domain, edit `src/App.jsx`:
 
 ```javascript
-const API_BASE_URL = 'https://fragile-lanita-rebero-app-897a7f5f.koyeb.app'; // Change this
+const API_BASE_URL = 'https://lengthy-sarina-cypralex-fb6a4e7e.koyeb.app'; // Change this
 ```
 
 ### Change Candidate Name

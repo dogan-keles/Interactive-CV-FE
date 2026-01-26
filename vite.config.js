@@ -8,7 +8,7 @@ export default defineConfig({
     port: 3000,
     proxy: {
       '/api': {
-        target: 'https://fragile-lanita-rebero-app-897a7f5f.koyeb.app',
+        target: 'https://lengthy-sarina-cypralex-fb6a4e7e.koyeb.app',
         changeOrigin: true,
       },
     },

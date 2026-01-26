@@ -211,7 +211,7 @@ setMessages([...messages, userMessage])
 setIsLoading(true)
 
 // 4. Make API call
-fetch('https://fragile-lanita-rebero-app-897a7f5f.koyeb.app/api/chat', {
+fetch('https://lengthy-sarina-cypralex-fb6a4e7e.koyeb.app/api/chat', {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify({ query, profile_id: 1 })
@@ -309,7 +309,7 @@ const debouncedSubmit = useMemo(
 // Always use HTTPS in production
 const API_BASE_URL = process.env.NODE_ENV === 'production'
   ? 'https://api.production.com'
-  : 'https://fragile-lanita-rebero-app-897a7f5f.koyeb.app';
+  : 'https://lengthy-sarina-cypralex-fb6a4e7e.koyeb.app';
 
 // Validate responses
 if (!response.ok) {
@@ -446,7 +446,7 @@ useEffect(() => {
 
 ```javascript
 // For real-time updates
-const ws = new WebSocket('ws://https://fragile-lanita-rebero-app-897a7f5f.koyeb.app');
+const ws = new WebSocket('ws://https://lengthy-sarina-cypralex-fb6a4e7e.koyeb.app');
 ws.onmessage = (event) => {
   const message = JSON.parse(event.data);
   setMessages(prev => [...prev, message]);
