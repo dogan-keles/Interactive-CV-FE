@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { Routes, Route, Link, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom'; // BrowserRouter kaldırıldı
 import { Sun, Moon, Linkedin, Github, Trophy, MessageSquare } from 'lucide-react';
 import Header from './components/Header';
 import ChatContainer from './components/ChatContainer';
@@ -49,6 +49,7 @@ const MainChat = ({ darkMode, setDarkMode }) => {
       setIsLoading(false);
     }
   };
+  console.log('Current URL:', window.location.pathname);
 
   return (
     <div className="container mx-auto px-6 py-10 max-w-7xl animate-fadeIn">
@@ -94,13 +95,10 @@ const MainChat = ({ darkMode, setDarkMode }) => {
 };
 
 function App() {
-  // GÜVENLİ STATE BAŞLATMA: JSON hatasını önleyen blok
   const [darkMode, setDarkMode] = useState(() => {
     try {
       const saved = localStorage.getItem('theme');
       if (saved === null) return true;
-
-      // Eğer veri "true" veya "false" stringi ise parse et, değilse düz metin kontrolü yap
       try {
         return JSON.parse(saved);
       } catch {
@@ -121,7 +119,6 @@ function App() {
       <Routes>
         <Route path="/" element={<MainChat darkMode={darkMode} setDarkMode={setDarkMode} />} />
         <Route path="/download-cv" element={<DownloadCV darkMode={darkMode} />} />
-        {/* Tanımlı olmayan her path ana sayfaya yönlendirir */}
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </div>
