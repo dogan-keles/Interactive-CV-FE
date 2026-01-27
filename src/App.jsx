@@ -1,8 +1,10 @@
 import { useState, useEffect, useRef } from 'react';
-import { Sun, Moon, Linkedin, Github, Trophy, MessageSquare, Download } from 'lucide-react';
+import { Routes, Route, Link, Navigate } from 'react-router-dom';
+import { Sun, Moon, Linkedin, Github, Trophy, MessageSquare } from 'lucide-react';
 import Header from './components/Header';
 import ChatContainer from './components/ChatContainer';
 import ChatInput from './components/ChatInput';
+import DownloadCV from "./pages/DownloadCV";
 
 const MainChat = ({ darkMode, setDarkMode }) => {
   const [messages, setMessages] = useState([]);
@@ -22,14 +24,13 @@ const MainChat = ({ darkMode, setDarkMode }) => {
     setMessages([{
       id: Date.now(),
       type: 'ai',
-      text: "Selam! Ben Doğan'ın CV Agent'ıyım. Kariyerim hakkında her şeyi sorabilir veya 'CV'ni indir' diyerek güncel özgeçmişime ulaşabilirsin.",
+      text: "Selam! Ben Doğan'ın CV Agent'ıyım. Bana kariyerimle ilgili her şeyi sorabilirsin.",
       timestamp: new Date(),
     }]);
   }, []);
 
   const handleSendMessage = async (query) => {
     if (!query.trim()) return;
-
     const userMessage = { id: Date.now(), type: 'user', text: query, timestamp: new Date() };
     setMessages(prev => [...prev, userMessage]);
     setIsLoading(true);
@@ -41,15 +42,7 @@ const MainChat = ({ darkMode, setDarkMode }) => {
         body: JSON.stringify({ query, profile_id: PROFILE_ID }),
       });
       const data = await response.json();
-
-      // Agent yanıtını ekle
-      setMessages(prev => [...prev, {
-        id: Date.now() + 1,
-        type: 'ai',
-        text: data.response,
-        timestamp: new Date()
-      }]);
-
+      setMessages(prev => [...prev, { id: Date.now() + 1, type: 'ai', text: data.response, timestamp: new Date() }]);
     } catch (err) {
       setError('Bağlantı hatası.');
     } finally {
@@ -59,7 +52,7 @@ const MainChat = ({ darkMode, setDarkMode }) => {
 
   return (
     <div className="container mx-auto px-6 py-10 max-w-7xl animate-fadeIn">
-      {/* Navigasyon Barı (Linkler kaldırıldı, sadece sosyal ve tema) */}
+      {/* Navigasyon */}
       <div className="flex flex-col md:flex-row justify-between items-center mb-12 gap-6">
         <div className="flex items-center gap-4">
           <div className="p-3 bg-emerald-500 rounded-2xl shadow-lg shadow-emerald-500/20">
@@ -73,26 +66,24 @@ const MainChat = ({ darkMode, setDarkMode }) => {
 
         <div className={`flex items-center gap-3 p-2 rounded-2xl border shadow-xl transition-all duration-300 ${darkMode ? 'bg-slate-800 border-slate-700' : 'bg-white border-slate-200'}`}>
           <div className="flex items-center gap-1">
-            <a href="https://www.linkedin.com/in/dogan-keles/" target="_blank" rel="noreferrer" className={`p-2 rounded-xl transition-colors ${darkMode ? 'text-slate-300 hover:bg-emerald-500/10 hover:text-emerald-500' : 'text-slate-600 hover:bg-emerald-50 hover:text-emerald-600'}`}><Linkedin size={20} /></a>
+            <a href="https://linkedin.com/in/dogan-keles/" target="_blank" rel="noreferrer" className={`p-2 rounded-xl transition-colors ${darkMode ? 'text-slate-300 hover:bg-emerald-500/10 hover:text-emerald-500' : 'text-slate-600 hover:bg-emerald-50 hover:text-emerald-600'}`}><Linkedin size={20} /></a>
             <a href="https://github.com/dogan-keles" target="_blank" rel="noreferrer" className={`p-2 rounded-xl transition-colors ${darkMode ? 'text-slate-300 hover:bg-emerald-500/10 hover:text-emerald-500' : 'text-slate-600 hover:bg-emerald-50 hover:text-emerald-600'}`}><Github size={20} /></a>
-            <a href="https://www.hackerrank.com/profile/dgnkls_47" target="_blank" rel="noreferrer" className={`p-2 rounded-xl transition-colors ${darkMode ? 'text-slate-300 hover:bg-emerald-500/10 hover:text-emerald-500' : 'text-slate-600 hover:bg-emerald-50 hover:text-emerald-600'}`}><Trophy size={20} /></a>
+            <a href="https://hackerrank.com/dgnkls_47" target="_blank" rel="noreferrer" className={`p-2 rounded-xl transition-colors ${darkMode ? 'text-slate-300 hover:bg-emerald-500/10 hover:text-emerald-500' : 'text-slate-600 hover:bg-emerald-50 hover:text-emerald-600'}`}><Trophy size={20} /></a>
           </div>
           <div className={`w-px h-6 mx-1 ${darkMode ? 'bg-slate-700' : 'bg-slate-200'}`}></div>
-          <button onClick={() => setDarkMode(!darkMode)} className={`p-2 rounded-xl transition-all ${darkMode ? 'bg-slate-700 text-yellow-400' : 'bg-slate-100 text-yellow-600'}`}>
+          <button onClick={() => setDarkMode(!darkMode)} className={`p-2 rounded-xl transition-all ${darkMode ? 'bg-slate-700 text-yellow-400 hover:bg-slate-600' : 'bg-slate-100 text-yellow-600 hover:bg-slate-200'}`}>
             {darkMode ? <Sun size={20} /> : <Moon size={20} />}
           </button>
         </div>
       </div>
 
-      {/* Ana Chatbox */}
-      <div className={`relative rounded-[2.5rem] transition-all duration-500 border overflow-hidden ${darkMode ? 'bg-slate-900/40 border-white/5 backdrop-blur-3xl shadow-2xl' : 'bg-white border-slate-200 shadow-xl'}`}>
+      {/* Chatbox */}
+      <div className={`relative rounded-[2.5rem] transition-all duration-500 border overflow-hidden ${darkMode ? 'bg-slate-900/40 border-white/5 backdrop-blur-3xl shadow-2xl shadow-black/50' : 'bg-white border-slate-200 shadow-xl'}`}>
         <div className={`p-8 border-b ${darkMode ? 'border-white/5' : 'border-slate-100'}`}>
           <Header darkMode={darkMode} />
         </div>
-
         <div className="h-[650px] flex flex-col">
           <ChatContainer messages={messages} isLoading={isLoading} ref={chatContainerRef} darkMode={darkMode} />
-
           <div className={`p-6 ${darkMode ? 'bg-slate-900/50' : 'bg-slate-50/50'}`}>
             <ChatInput onSendMessage={handleSendMessage} disabled={isLoading} error={error} darkMode={darkMode} />
           </div>
@@ -103,9 +94,21 @@ const MainChat = ({ darkMode, setDarkMode }) => {
 };
 
 function App() {
+  // GÜVENLİ STATE BAŞLATMA: JSON hatasını önleyen blok
   const [darkMode, setDarkMode] = useState(() => {
-    const saved = localStorage.getItem('theme');
-    return saved ? JSON.parse(saved) : true;
+    try {
+      const saved = localStorage.getItem('theme');
+      if (saved === null) return true;
+
+      // Eğer veri "true" veya "false" stringi ise parse et, değilse düz metin kontrolü yap
+      try {
+        return JSON.parse(saved);
+      } catch {
+        return saved === 'true';
+      }
+    } catch (e) {
+      return true;
+    }
   });
 
   useEffect(() => {
@@ -115,7 +118,12 @@ function App() {
 
   return (
     <div className={`min-h-screen font-sans transition-colors duration-500 ${darkMode ? 'bg-slate-900 text-slate-100' : 'bg-slate-50 text-slate-900'}`}>
-      <MainChat darkMode={darkMode} setDarkMode={setDarkMode} />
+      <Routes>
+        <Route path="/" element={<MainChat darkMode={darkMode} setDarkMode={setDarkMode} />} />
+        <Route path="/download-cv" element={<DownloadCV darkMode={darkMode} />} />
+        {/* Tanımlı olmayan her path ana sayfaya yönlendirir */}
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
     </div>
   );
 }
