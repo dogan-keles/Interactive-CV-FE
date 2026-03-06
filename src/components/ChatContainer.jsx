@@ -2,26 +2,26 @@ import { forwardRef } from 'react';
 import Message from './Message';
 import LoadingIndicator from './LoadingIndicator';
 
-const ChatContainer = forwardRef(({ messages, isLoading }, ref) => {
+const ChatContainer = forwardRef(({ messages, isLoading, darkMode }, ref) => {
   return (
     <div
       ref={ref}
-      className="h-[600px] overflow-y-auto p-6 space-y-4 scroll-smooth"
+      className="flex-1 min-h-0 overflow-y-auto p-4 sm:p-6 space-y-4 scroll-smooth"
       style={{
         scrollbarWidth: 'thin',
-        scrollbarColor: '#cbd5e1 #f1f5f9',
+        scrollbarColor: darkMode ? '#334155 transparent' : '#cbd5e1 transparent',
       }}
     >
       {messages.map((message) => (
-        <Message key={message.id} message={message} />
+        <Message key={message.id} message={message} darkMode={darkMode} />
       ))}
-      
-      {isLoading && <LoadingIndicator />}
-      
+
+      {isLoading && <LoadingIndicator darkMode={darkMode} />}
+
       {messages.length === 0 && !isLoading && (
         <div className="flex items-center justify-center h-full">
-          <p className="text-slate-400 text-lg">
-            Start by asking a question...
+          <p className={`text-lg ${darkMode ? 'text-slate-600' : 'text-slate-400'}`}>
+            Bir soru sorarak başlayın...
           </p>
         </div>
       )}
@@ -30,5 +30,4 @@ const ChatContainer = forwardRef(({ messages, isLoading }, ref) => {
 });
 
 ChatContainer.displayName = 'ChatContainer';
-
 export default ChatContainer;
